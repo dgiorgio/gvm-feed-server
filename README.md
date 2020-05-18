@@ -7,8 +7,10 @@ $ cd gvm-nvt-feed-server
 $ docker-compose up -d
 ```
 By default, synchronization will start as soon as the container is started.
+
 Cron is also applied by default, with the definition: 0 \*/1 \* \* \*
-More details in the script [docker-entrypoint.sh](https://github.com/dgiorgio/gvm-nvt-feed-server/build/docker-entrypoint.sh)
+
+More details in the script [docker-entrypoint.sh](https://github.com/dgiorgio/gvm-nvt-feed-server/blob/master/build/docker-entrypoint.sh)
 
 #### Build Dockerimage
 ```console
@@ -18,6 +20,7 @@ $ ./build.sh
 
 #### Docker compose customization
 Crontab: Add 'CRON' var in the 'environment' var
+
 Rsync: Add 'RSYNC_COMMAND' var in the 'environment' var
 
 ```console
