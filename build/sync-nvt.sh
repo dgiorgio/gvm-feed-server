@@ -3,6 +3,7 @@
 DATE="$(date '+%Y-%m-%d %H:%M:%S')"
 RSYNC_COMMAND="rsync -ltrzP --delete --exclude private/ rsync://feed.community.greenbone.net:/nvt-feed /data/nvt_feed"
 
+rm -f /var/run/rsyncd.pid
 ${RSYNC_COMMAND} >> /var/log/nvt-sync.log 2>&1
 
 if [ "${?}" == "0" ]; then
