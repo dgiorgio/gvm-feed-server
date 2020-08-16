@@ -4,6 +4,7 @@ RUN apk add --no-cache rsync
 COPY rsyncd.conf /etc/rsyncd.conf
 
 COPY docker-entrypoint.sh sync.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/*.sh
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["rsync", "--daemon", "--no-detach", "--verbose"]
