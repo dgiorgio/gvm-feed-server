@@ -1,20 +1,20 @@
-# gvm-nvt-feed-server
-[https://github.com/dgiorgio/gvm-nvt-feed-server](https://github.com/dgiorgio/gvm-nvt-feed-server)
+# gvm-feed-server
+[https://github.com/dgiorgio/gvm-feed-server](https://github.com/dgiorgio/gvm-feed-server)
 #### Run with docker-compose
 ```console
-$ git clone https://github.com/dgiorgio/gvm-nvt-feed-server
-$ cd gvm-nvt-feed-server
+$ git clone https://github.com/dgiorgio/gvm-feed-server
+$ cd gvm-feed-server
 $ docker-compose up -d
 ```
 By default, synchronization will start as soon as the container is started.
 
 Cron is also applied by default, with the definition: 0 \*/1 \* \* \*
 
-More details in the script [docker-entrypoint.sh](https://github.com/dgiorgio/gvm-nvt-feed-server/blob/master/build/docker-entrypoint.sh)
+More details in the script [docker-entrypoint.sh](https://github.com/dgiorgio/gvm-feed-server/blob/master/build/docker-entrypoint.sh)
 
 #### Build Dockerimage
 ```console
-$ cd gvm-nvt-feed-server
+$ cd gvm-feed-server
 $ ./build.sh
 ```
 
@@ -30,8 +30,8 @@ version: '3'
 
 services:
   app:
-    image: "dgiorgio/gvm-nvt-feed-server:latest"
-    hostname: "gvm-nvt-feed-server"
+    image: "dgiorgio/gvm-feed-server:latest"
+    hostname: "gvm-feed-server"
     restart: always
     ports:
       - "873:873"
@@ -40,7 +40,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
     environment:
       - CRON=*/30 * * * *
-      - RSYNC_COMMAND=rsync -ltrvP --delete --exclude private/ rsync://feed.community.greenbone.net:/nvt-feed /data/nvt_feed
+      - RSYNC_COMMAND=rsync -ltrzP --delete --exclude private/ rsync://feed.community.greenbone.net:/${SERVER} /data/${SERVER}
 
 volumes:
   data:
