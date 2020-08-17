@@ -8,21 +8,18 @@ mkdir -p "/etc/cron.d"
 [ "${CRON}" == "" ] && CRON="0 */1 * * *"
 touch "${CRON_FILE}" && \
 chmod 0644 "${CRON_FILE}"
-for i in ${SERVERS} ; do
-  echo "${CRON} /usr/local/bin/sync.sh ${i} >> /var/log/${i}.log 2>&1" >> "${CRON_FILE}"
-done
+echo "${CRON} /usr/local/bin/sync.sh ${SERVERS}" >> "${CRON_FILE}"
 crontab "${CRON_FILE}"
 # Start cron
 crond
 
-# Start rsync
-for i in ${SERVERS} ; do
-  echo "Starting ${i} synchronization..."
+for i in ${SERVERS}; do
   touch /var/log/${i}.log
-  /usr/local/bin/sync.sh ${i} >> /var/log/${i}.log 2>&1 &
 done
 
-rm -f /var/run/rsyncd.pid
 tail -f /var/log/*.log &
+rm -f /var/run/rsyncd.pid
+# Start rsync
+SERVERS="${SERVERS}" /usr/local/bin/sync.sh
 echo "Starting rsync server..."
 exec "$@"
