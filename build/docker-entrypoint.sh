@@ -8,7 +8,7 @@ mkdir -p "/etc/cron.d"
 [ "${CRON}" == "" ] && CRON="0 */1 * * *"
 touch "${CRON_FILE}" && \
 chmod 0644 "${CRON_FILE}"
-echo "${CRON} /usr/local/bin/sync.sh ${SERVERS}" >> "${CRON_FILE}"
+echo "${CRON} export SERVERS=\"${SERVERS}\" ; /usr/local/bin/sync.sh" > "${CRON_FILE}"
 crontab "${CRON_FILE}"
 # Start cron
 crond

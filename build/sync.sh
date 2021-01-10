@@ -18,6 +18,6 @@ _start() {
 
 for i in ${SERVERS}; do
   DATE="$(date '+%Y-%m-%d %H:%M:%S')"
-  RSYNC_COMMAND="rsync -ltrzPv --delete --exclude private/ rsync://feed.community.greenbone.net:/${i} /data/${i}"
+  RSYNC_COMMAND="rsync -ltvrPz --delete --exclude private/ rsync://feed.community.greenbone.net:/${i} /data/${i}"
   _start ${i}
 done

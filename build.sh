@@ -12,7 +12,7 @@ echo "
 ################################################################################
 ################### Build gvm-feed-server ##############################################
 ################################################################################"
-gvm_feed_server_version=2.0
+gvm_feed_server_version=2.1
 build_gvm_feed_server=""
 docker build -f ./Dockerfile \
   -t "dgiorgio/gvm-feed-server:${gvm_feed_server_version}${build_gvm_feed_server:-${BUILD}}" \
