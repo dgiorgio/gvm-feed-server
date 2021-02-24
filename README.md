@@ -47,5 +47,11 @@ volumes:
 
 ```
 
+#### Test repository
+Change "gvm_feed_server.service.com" to your server address.
+```console
+rsync --list-only rsync://gvm_feed_server.service.com:/
+```
+
 ## License
 This Docker image is licensed under the MIT, see [LICENSE](LICENSE.md).
