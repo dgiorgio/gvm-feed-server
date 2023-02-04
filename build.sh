@@ -5,8 +5,8 @@ set -e
 cd ./build
 
 # build gvm-feed-server
-gvm_feed_server_version=2.2
-build_gvm_feed_server="-20220720"
+gvm_feed_server_version=2.3
+build_gvm_feed_server="-20230203"
 echo "
 ################################################################################
 ################### Build gvm-feed-server ######################################
