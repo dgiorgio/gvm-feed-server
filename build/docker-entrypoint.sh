@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-SERVERS="data-objects nvt-feed scap-data cert-data"
+SERVERS="data-objects nvt-feed scap-data cert-data community-legacy community"
 CRON_FILE="/etc/cron.d/crontab"
 mkdir -p "/etc/cron.d"
 
