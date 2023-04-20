@@ -4,7 +4,7 @@ version: '3'
 
 services:
   app:
-    image: "dgiorgio/gvm-feed-server:latest"
+    image: "dgiorgio/gvm-feed-server:2.3"
     hostname: "gvm-feed-server"
     restart: always
     ports:
