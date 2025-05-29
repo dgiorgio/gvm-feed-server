@@ -1,32 +1,34 @@
 # gvm-feed-server
 [https://github.com/dgiorgio/gvm-feed-server](https://github.com/dgiorgio/gvm-feed-server)
-#### Run with docker-compose
+
+The `gvm-feed-server` is a Docker server that replicates the official Greenbone Vulnerability Manager (GVM) feeds to create a local mirror.
+
+#### Run with docker compose
 ```console
 $ git clone https://github.com/dgiorgio/gvm-feed-server
 $ cd gvm-feed-server
-$ docker-compose up -d
+$ docker compose up -d
 ```
-By default, synchronization will start as soon as the container is started.
+By default, synchronization will start as soon as the container starts. A cron job is also set up to run automatically with the default schedule: `0 */1 * * *`
 
-Cron is also applied by default, with the definition: 0 \*/1 \* \* \*
+For more details on startup and synchronization scripts, see [docker-entrypoint.sh](https://github.com/dgiorgio/gvm-feed-server/blob/master/build/docker-entrypoint.sh)
 
-More details in the script [docker-entrypoint.sh](https://github.com/dgiorgio/gvm-feed-server/blob/master/build/docker-entrypoint.sh)
-
-#### Build Dockerimage
+#### Building the Docker Image
 ```console
 $ cd gvm-feed-server
 $ ./build.sh
 ```
 
-#### Docker compose customization
-Crontab: Add 'CRON' var in the 'environment' var
+#### Docker Compose Customization
+##### Environment Variables
+You can customize the synchronization and cron frequency using environment variables:
 
-Rsync: Add 'RSYNC_COMMAND' var in the 'environment' var
+**CRON**: Set the cron frequency to automate synchronization (example: */30 * * * * to run every 30 minutes).
+**RSYNC_COMMAND**: Set the rsync command to customize the synchronization process (e.g., exclude specific folders).
 
+##### Example of docker-compose.yml with Customization
 ```console
 ---
-
-version: '3'
 
 services:
   app:
@@ -48,7 +50,7 @@ volumes:
 ```
 
 #### Test repository
-Change "gvm_feed_server.service.com" to your server address.
+To test the rsync server, replace `gvm_feed_server.service.com` with your server’s address:
 ```console
 rsync --list-only rsync://gvm_feed_server.service.com:/
 ```
